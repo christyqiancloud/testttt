@@ -11,7 +11,11 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from .models import Choice, Question
+from django.shortcuts import redirect
 
+def redirect_view(request):
+    response = redirect('/tests/')
+    return response
 
 class IndexView(generic.ListView):
     template_name = 'tests/index.html'
@@ -84,3 +88,9 @@ def vote(request, question_id):
 # def results(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
 #     return render(request, 'tests/results.html', {'question': question})
+
+
+"""
+
+
+"""
