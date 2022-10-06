@@ -4,9 +4,9 @@
 # from .models import Choice, Question
 # from django.urls import reverse
 # from django.http import Http404
+from re import A
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import TemplateDoesNotExist
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
@@ -39,12 +39,11 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist,TemplateDoesNotExist):
+    except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
             'question': question,
