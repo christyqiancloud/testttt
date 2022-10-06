@@ -1,17 +1,19 @@
-{% load static %}
-
+{%load static%}
 <link rel="stylesheet" href="{% static 'usatest/style.css' %}">
+
+
 {% if latest_question_list %}
     <ul>
-    {% comment %} {% for question in latest_question_list %}
-    <li><a href="{% url 'usatest:detail' question.id %}">{{ question.question_text }}</a></li> {% endcomment %}
-
+   {% comment %}
+    
+     {% for question in latest_question_list %}
+    <li><a href="{% url 'usatest:detail' question.id %}">{{ question.question_text }}</a></li> 
+    {% endcomment %}
     {% for question in latest_question_list %}
     {{question.question_text}}
     <br>
         {% for choice in question.choice_set.all%}
-            {{choice.choice_text}}
-            <br> 
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
   
 
@@ -22,3 +24,19 @@
 {% endif %}
 
 <input type="submit" value="Submit">
+
+{% comment %} <h1>This is a Heading</h1>
+<p>This is a paragraph.</p>
+
+<form>
+<ul>
+         <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+         <label for="choice{{ forloop.counter }}">dddd</label><br>
+<li>2</li>
+<li>3</li>
+
+</ul>
+   <input type="submit" value="Submit">
+</form>
+ {% endcomment %}
+
